@@ -33,9 +33,13 @@ public class Triagem {
         alergias = new ArrayList<>();
     }
 public Float CalculoIMC(){
-    
+    IMC = peso/(altura*altura);
 
     return IMC;
+}
+public Boolean diagnosticarFebre(){
+
+return febre;
 }
     
     @Override

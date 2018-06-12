@@ -3,18 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.juan.formularios;
+package br.com.juan.interfaces;
+
+import br.com.juan.objetos.Atestado;
+import br.com.juan.objetos.Consulta;
+import br.com.juan.singleton.SAtestado;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author SATC
  */
-public class Atestado extends javax.swing.JFrame {
+public class JFAtestado extends javax.swing.JFrame {
+    
+    Atestado at;
 
     /**
      * Creates new form Atestado
      */
-    public Atestado() {
+    public JFAtestado() {
         initComponents();
     }
 
@@ -35,6 +48,8 @@ public class Atestado extends javax.swing.JFrame {
         jTFDataFimAtestado = new javax.swing.JTextField();
         jTFQuantidadeDias = new javax.swing.JTextField();
         jTFDataInicioAtestado = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jCBConsultas = new javax.swing.JComboBox<>();
         jBCriarAtestado = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -72,6 +87,16 @@ public class Atestado extends javax.swing.JFrame {
         jTFDataInicioAtestado.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jTFDataInicioAtestado.setText("   ");
 
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel1.setText("Escolher consulta:");
+
+        jCBConsultas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione>" }));
+        jCBConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBConsultasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPCadastroAtestadoLayout = new javax.swing.GroupLayout(jPCadastroAtestado);
         jPCadastroAtestado.setLayout(jPCadastroAtestadoLayout);
         jPCadastroAtestadoLayout.setHorizontalGroup(
@@ -81,28 +106,29 @@ public class Atestado extends javax.swing.JFrame {
                 .addGroup(jPCadastroAtestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLdataInicioAtestado)
                     .addComponent(jLDataFimAtestado)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(jPCadastroAtestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPCadastroAtestadoLayout.createSequentialGroup()
                         .addComponent(jTFDataInicioAtestado, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 22, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPCadastroAtestadoLayout.createSequentialGroup()
-                        .addGroup(jPCadastroAtestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTFDataFimAtestado)
-                            .addComponent(jTFQuantidadeDias, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(jPCadastroAtestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPCadastroAtestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jTFDataFimAtestado, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTFQuantidadeDias, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE))
+                            .addComponent(jCBConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(20, Short.MAX_VALUE))))
         );
         jPCadastroAtestadoLayout.setVerticalGroup(
             jPCadastroAtestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPCadastroAtestadoLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPCadastroAtestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPCadastroAtestadoLayout.createSequentialGroup()
-                        .addGroup(jPCadastroAtestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTFDataInicioAtestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLDataFimAtestado))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPCadastroAtestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTFDataInicioAtestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLDataFimAtestado))
                     .addGroup(jPCadastroAtestadoLayout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(jPCadastroAtestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -111,40 +137,52 @@ public class Atestado extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPCadastroAtestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jTFQuantidadeDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(16, Short.MAX_VALUE))))
+                            .addComponent(jTFQuantidadeDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addGroup(jPCadastroAtestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jBCriarAtestado.setText("Criar Atestado");
+        jBCriarAtestado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCriarAtestadoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(jPCadastroAtestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLTituloAtestado))
-                    .addComponent(jBCriarAtestado, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addComponent(jBCriarAtestado)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jPCadastroAtestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLTituloAtestado))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLTituloAtestado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPCadastroAtestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPCadastroAtestado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBCriarAtestado)
-                .addGap(6, 6, 6))
+                .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTFQuantidadeDiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFQuantidadeDiasActionPerformed
@@ -154,6 +192,56 @@ public class Atestado extends javax.swing.JFrame {
     private void jTFDataFimAtestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFDataFimAtestadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFDataFimAtestadoActionPerformed
+
+    private void jBCriarAtestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCriarAtestadoActionPerformed
+        Atestado at = new Atestado(jTFDataInicioAtestado.getText(), jTFDataFimAtestado.getText(), consulta,jTFQuantidadeDias.getText());
+        
+       List<Consulta> consulta = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+        try {
+            Date dataInicioAtestado = sdf.parse(this.jTFDataInicioAtestado.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(JFAtestado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Date dataFimoAtestado = sdf.parse(this.jTFDataFimAtestado.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(JFAtestado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int quantidadeDias = Integer.parseInt(this.jTFQuantidadeDias.getText());
+            String  consults = "";
+        for (Consulta c : consulta) {
+             consults += c.get
+            
+        }
+ {
+            
+        }
+        
+        
+        
+        
+        switch(jCBConsultas.getSelectedObjects()){
+            case   1:
+                
+        
+        
+        }
+        
+        
+        
+        
+        SAtestado.getInstance().getAtestados().add(at);
+        
+        
+        
+  
+        
+    }//GEN-LAST:event_jBCriarAtestadoActionPerformed
+
+    private void jCBConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBConsultasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBConsultasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,28 +260,31 @@ public class Atestado extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Atestado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFAtestado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Atestado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFAtestado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Atestado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFAtestado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Atestado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFAtestado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Atestado().setVisible(true);
+                new JFAtestado().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCriarAtestado;
+    private javax.swing.JComboBox<String> jCBConsultas;
     private javax.swing.JLabel jLDataFimAtestado;
     private javax.swing.JLabel jLTituloAtestado;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLdataInicioAtestado;
     private javax.swing.JPanel jPCadastroAtestado;

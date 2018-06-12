@@ -3,18 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.juan.formularios;
+package br.com.juan.interfaces;
+
+import br.com.juan.objetos.Enfermeira;
+import br.com.juan.singleton.SEnfermeira;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author SATC
  */
-public class Enfermeira extends javax.swing.JFrame {
+public class JFEnfermeira extends javax.swing.JFrame {
+    Enfermeira e;
 
     /**
      * Creates new form Enfermeira
      */
-    public Enfermeira() {
+    public JFEnfermeira() {
         initComponents();
     }
 
@@ -50,6 +60,7 @@ public class Enfermeira extends javax.swing.JFrame {
         jTFTelefoneEnfermeira = new javax.swing.JTextField();
         jLTituloEnfer = new javax.swing.JLabel();
         jBCadastrarEnfermeira = new javax.swing.JButton();
+        jBEnfermeirasCadastradas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,19 +73,15 @@ public class Enfermeira extends javax.swing.JFrame {
         jLSexoEnfermeira.setText("Sexo (M)(F):");
 
         jTFEstadoCivilEnfermeira.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTFEstadoCivilEnfermeira.setText(" ");
 
         jTFSexoEnfermeira.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTFSexoEnfermeira.setText(" ");
 
         jLabel13.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel13.setText("Setor:");
 
         jTFSetorEnfermeira.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTFSetorEnfermeira.setText(" ");
 
         jTFCofen.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTFCofen.setText("               ");
         jTFCofen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTFCofenActionPerformed(evt);
@@ -85,19 +92,14 @@ public class Enfermeira extends javax.swing.JFrame {
         jLCofen.setText("Cofen:");
 
         jTFCPFEnfermeira.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTFCPFEnfermeira.setText(" ");
 
         jTFRGEnfermeira.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTFRGEnfermeira.setText(" ");
 
         jTFNomeEnfermeiro.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTFNomeEnfermeiro.setText("   ");
 
         jTFEnderecoEnfermeira.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTFEnderecoEnfermeira.setText(" ");
 
         jTFDataNascimentoEnfermeira.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTFDataNascimentoEnfermeira.setText("             ");
 
         jLNomeEnfermeira.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLNomeEnfermeira.setText("Nome:");
@@ -118,55 +120,56 @@ public class Enfermeira extends javax.swing.JFrame {
         jLTeleEnfermeira.setText("Telefone:");
 
         jTFTelefoneEnfermeira.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTFTelefoneEnfermeira.setText(" ");
 
         javax.swing.GroupLayout jPCadastroEnfermeiraLayout = new javax.swing.GroupLayout(jPCadastroEnfermeira);
         jPCadastroEnfermeira.setLayout(jPCadastroEnfermeiraLayout);
         jPCadastroEnfermeiraLayout.setHorizontalGroup(
             jPCadastroEnfermeiraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPCadastroEnfermeiraLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLSexoEnfermeira)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTFSexoEnfermeira, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDataNascimentoEnfermeira, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTFDataNascimentoEnfermeira, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPCadastroEnfermeiraLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPCadastroEnfermeiraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLNomeEnfermeira, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLEnderecoEnfermeira, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLRGEnfermeira, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLCPFPaciente, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPCadastroEnfermeiraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPCadastroEnfermeiraLayout.createSequentialGroup()
+                        .addComponent(jLSexoEnfermeira)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTFSexoEnfermeira, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDataNascimentoEnfermeira, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTFDataNascimentoEnfermeira, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCadastroEnfermeiraLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPCadastroEnfermeiraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLCofen, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLTeleEnfermeira, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(10, 10, 10))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCadastroEnfermeiraLayout.createSequentialGroup()
+                            .addComponent(jLNomeEnfermeira, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLEnderecoEnfermeira, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLRGEnfermeira, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLCPFPaciente, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPCadastroEnfermeiraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPCadastroEnfermeiraLayout.createSequentialGroup()
-                                .addComponent(jTFEnderecoEnfermeira, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(59, 59, 59)
-                                .addComponent(jLECEnfermeira))
-                            .addGroup(jPCadastroEnfermeiraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jTFNomeEnfermeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTFCPFEnfermeira, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTFRGEnfermeira, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCadastroEnfermeiraLayout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addGap(18, 18, 18)))
-                .addGroup(jPCadastroEnfermeiraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTFTelefoneEnfermeira, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTFEstadoCivilEnfermeira, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTFCofen, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTFSetorEnfermeira, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCadastroEnfermeiraLayout.createSequentialGroup()
+                                .addGroup(jPCadastroEnfermeiraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLCofen, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLTeleEnfermeira, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(10, 10, 10))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCadastroEnfermeiraLayout.createSequentialGroup()
+                                .addGroup(jPCadastroEnfermeiraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPCadastroEnfermeiraLayout.createSequentialGroup()
+                                        .addComponent(jTFEnderecoEnfermeira, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(59, 59, 59)
+                                        .addComponent(jLECEnfermeira))
+                                    .addGroup(jPCadastroEnfermeiraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jTFNomeEnfermeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTFCPFEnfermeira, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTFRGEnfermeira, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCadastroEnfermeiraLayout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addGap(18, 18, 18)))
+                        .addGroup(jPCadastroEnfermeiraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTFTelefoneEnfermeira, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTFEstadoCivilEnfermeira, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTFCofen, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTFSetorEnfermeira, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPCadastroEnfermeiraLayout.setVerticalGroup(
@@ -209,6 +212,18 @@ public class Enfermeira extends javax.swing.JFrame {
         jLTituloEnfer.setText("Cadastro de Enfermeira(o)");
 
         jBCadastrarEnfermeira.setText("Cadastrar");
+        jBCadastrarEnfermeira.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCadastrarEnfermeiraActionPerformed(evt);
+            }
+        });
+
+        jBEnfermeirasCadastradas.setText("Mostrar Cadastrados");
+        jBEnfermeirasCadastradas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEnfermeirasCadastradasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -224,7 +239,9 @@ public class Enfermeira extends javax.swing.JFrame {
                         .addComponent(jPCadastroEnfermeira, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(51, 51, 51)
+                .addComponent(jBEnfermeirasCadastradas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBCadastrarEnfermeira)
                 .addGap(18, 18, 18))
         );
@@ -236,16 +253,49 @@ public class Enfermeira extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPCadastroEnfermeira, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7)
-                .addComponent(jBCadastrarEnfermeira)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBCadastrarEnfermeira)
+                    .addComponent(jBEnfermeirasCadastradas))
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTFCofenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCofenActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFCofenActionPerformed
+
+    private void jBCadastrarEnfermeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarEnfermeiraActionPerformed
+        Enfermeira e = new Enfermeira(Integer.parseInt(jTFCofen.getText()), jTFSetorEnfermeira.getText(), jTFNomeEnfermeiro.getText(),
+           jTFTelefoneEnfermeira.getText(), jTFCPFEnfermeira.getText(), jTFRGEnfermeira.getText(), jTFEnderecoEnfermeira.getText(),
+           jTFEstadoCivilEnfermeira.getText(),jTFSexoEnfermeira.getText().toUpperCase().charAt(0));
+        SimpleDateFormat sdf= new SimpleDateFormat("dd/mm/yyyy");
+        String nomeEnfermeira = this.jTFNomeEnfermeiro.getText();
+        String RGEnfermeira =this.jTFRGEnfermeira.getText();
+        String CPFEnfermeira = this.jTFCPFEnfermeira.getText();
+        String EnderecoEnfermeira = this.jTFEnderecoEnfermeira.getText();
+        char sexo = this.jTFSexoEnfermeira.getText().toUpperCase().charAt(0);
+        int Cofen = Integer.parseInt(this.jTFCofen.getText());
+        String telefone = this.jTFTelefoneEnfermeira.getText();
+        String setor = this.jTFSetorEnfermeira.getText();
+        String EstadoCivilEnfermeira = this.jTFEstadoCivilEnfermeira.getText();
+        try {
+            Date DataNascimentoEnfermeira = sdf.parse(this.jTFDataNascimentoEnfermeira.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(JFEnfermeira.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        SEnfermeira.getInstance().getEnfermeiras().add(e);
+       
+        
+        
+    }//GEN-LAST:event_jBCadastrarEnfermeiraActionPerformed
+
+    private void jBEnfermeirasCadastradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEnfermeirasCadastradasActionPerformed
+        JOptionPane.showMessageDialog(this, SEnfermeira.getInstance().getEnfermeiras().set(SEnfermeira.getInstance().getEnfermeiras().size()-1, e));
+    }//GEN-LAST:event_jBEnfermeirasCadastradasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,26 +314,28 @@ public class Enfermeira extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Enfermeira.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFEnfermeira.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Enfermeira.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFEnfermeira.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Enfermeira.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFEnfermeira.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Enfermeira.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFEnfermeira.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Enfermeira().setVisible(true);
+                new JFEnfermeira().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCadastrarEnfermeira;
+    private javax.swing.JButton jBEnfermeirasCadastradas;
     private javax.swing.JLabel jDataNascimentoEnfermeira;
     private javax.swing.JLabel jLCPFPaciente;
     private javax.swing.JLabel jLCofen;

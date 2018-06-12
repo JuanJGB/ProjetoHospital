@@ -58,6 +58,10 @@ public class Atestado {
 
     @Override
     public String toString() {
+        
+        
+        
+        
         return "Atestado{" + "\n  Data início: " + dataInicio + "\ndata fim: " + dataFimAtestado + "\nconsulta: " + consulta + ", Quantidade de dias=" + QuantidadeDias + '}';
     }
     

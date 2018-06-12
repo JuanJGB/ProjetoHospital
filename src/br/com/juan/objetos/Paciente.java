@@ -20,7 +20,6 @@ public class Paciente extends Pessoa {
         this.responsavel = responsavel;
         this.numeroSus = numeroSus;
     }
-
     public int getId() {
         return id;
     }

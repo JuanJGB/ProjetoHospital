@@ -46,8 +46,10 @@ public class Medico extends Pessoa {
 
     @Override
     public String toString() {
-        return "Medico: " + "crm=" + crm + ", especialidade=" + especialidade + ", setor=" + setor + '}';
+        return "Medico{" + "crm:" + crm + ", especialidade:" + especialidade + ", setor:" + setor + '}';
     }
     
+
+  
     
 }

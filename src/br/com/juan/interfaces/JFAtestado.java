@@ -7,7 +7,9 @@ package br.com.juan.interfaces;
 
 import br.com.juan.objetos.Atestado;
 import br.com.juan.objetos.Consulta;
+import br.com.juan.objetos.Triagem;
 import br.com.juan.singleton.SAtestado;
+import br.com.juan.singleton.SConsulta;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,8 +25,10 @@ import java.util.logging.Logger;
  */
 public class JFAtestado extends javax.swing.JFrame {
     
-    Atestado at;
-
+    Atestado a;
+    Consulta c;
+    
+    
     /**
      * Creates new form Atestado
      */
@@ -49,10 +54,10 @@ public class JFAtestado extends javax.swing.JFrame {
         jTFQuantidadeDias = new javax.swing.JTextField();
         jTFDataInicioAtestado = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jCBConsultas = new javax.swing.JComboBox<>();
         jBCriarAtestado = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLTituloAtestado.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLTituloAtestado.setText("Cadastro de Atestado");
@@ -68,34 +73,24 @@ public class JFAtestado extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel4.setText("Quantidade de dias:");
 
-        jTFDataFimAtestado.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTFDataFimAtestado.setText(" ");
+        jTFDataFimAtestado.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jTFDataFimAtestado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTFDataFimAtestadoActionPerformed(evt);
             }
         });
 
-        jTFQuantidadeDias.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTFQuantidadeDias.setText("       ");
+        jTFQuantidadeDias.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jTFQuantidadeDias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTFQuantidadeDiasActionPerformed(evt);
             }
         });
 
-        jTFDataInicioAtestado.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTFDataInicioAtestado.setText("   ");
+        jTFDataInicioAtestado.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel1.setText("Escolher consulta:");
-
-        jCBConsultas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione>" }));
-        jCBConsultas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBConsultasActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPCadastroAtestadoLayout = new javax.swing.GroupLayout(jPCadastroAtestado);
         jPCadastroAtestado.setLayout(jPCadastroAtestadoLayout);
@@ -109,17 +104,11 @@ public class JFAtestado extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addGroup(jPCadastroAtestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPCadastroAtestadoLayout.createSequentialGroup()
-                        .addComponent(jTFDataInicioAtestado, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPCadastroAtestadoLayout.createSequentialGroup()
-                        .addGroup(jPCadastroAtestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPCadastroAtestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTFDataFimAtestado, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTFQuantidadeDias, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE))
-                            .addComponent(jCBConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(20, Short.MAX_VALUE))))
+                .addGroup(jPCadastroAtestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTFDataInicioAtestado, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                    .addComponent(jTFDataFimAtestado)
+                    .addComponent(jTFQuantidadeDias))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPCadastroAtestadoLayout.setVerticalGroup(
             jPCadastroAtestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,10 +128,8 @@ public class JFAtestado extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(jTFQuantidadeDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addGroup(jPCadastroAtestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCBConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jBCriarAtestado.setText("Criar Atestado");
@@ -194,54 +181,38 @@ public class JFAtestado extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFDataFimAtestadoActionPerformed
 
     private void jBCriarAtestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCriarAtestadoActionPerformed
-        Atestado at = new Atestado(jTFDataInicioAtestado.getText(), jTFDataFimAtestado.getText(), consulta,jTFQuantidadeDias.getText());
         
-       List<Consulta> consulta = new ArrayList<>();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+        Date dataInicioAtestado = new Date();
+        Date dataFimAtestado = new Date();
         try {
-            Date dataInicioAtestado = sdf.parse(this.jTFDataInicioAtestado.getText());
+            dataInicioAtestado = sdf.parse(this.jTFDataInicioAtestado.getText());
         } catch (ParseException ex) {
             Logger.getLogger(JFAtestado.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            Date dataFimoAtestado = sdf.parse(this.jTFDataFimAtestado.getText());
+            dataFimAtestado = sdf.parse(this.jTFDataFimAtestado.getText());
         } catch (ParseException ex) {
             Logger.getLogger(JFAtestado.class.getName()).log(Level.SEVERE, null, ex);
         }
-        int quantidadeDias = Integer.parseInt(this.jTFQuantidadeDias.getText());
-            String  consults = "";
-        for (Consulta c : consulta) {
-             consults += c.get
-            
+        int quantidadeDias = 0;
+        try {
+            quantidadeDias = Integer.parseInt(this.jTFQuantidadeDias.getText());
+        } catch (NumberFormatException e) {
         }
- {
-            
-        }
-        
-        
-        
-        
-        switch(jCBConsultas.getSelectedObjects()){
-            case   1:
+            String  ates = "";
                 
+        a = new Atestado(dataInicioAtestado, dataFimAtestado, c, quantidadeDias);
+        SAtestado.getInstance().getAtestados().add(a);
         
-        
+        for (Atestado ate : SAtestado.getInstance().getAtestados()) {
+             ates += " "+ate.toString(); 
+         JOptionPane.showMessageDialog(this, ates);
         }
         
-        
-        
-        
-        SAtestado.getInstance().getAtestados().add(at);
-        
-        
-        
-  
+
         
     }//GEN-LAST:event_jBCriarAtestadoActionPerformed
-
-    private void jCBConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBConsultasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCBConsultasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -281,7 +252,6 @@ public class JFAtestado extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCriarAtestado;
-    private javax.swing.JComboBox<String> jCBConsultas;
     private javax.swing.JLabel jLDataFimAtestado;
     private javax.swing.JLabel jLTituloAtestado;
     private javax.swing.JLabel jLabel1;

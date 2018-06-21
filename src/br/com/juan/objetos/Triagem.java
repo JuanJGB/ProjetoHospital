@@ -27,18 +27,18 @@ public class Triagem {
         this.sintoma = sintoma;
         this.peso = peso;
         this.altura = altura;
-        this.IMC = IMC;
+        this.IMC = CalculoIMC(altura, peso);
         this.temperatura = temperatura;
         this.febre = febre;
         alergias = new ArrayList<>();
     }
-public Float CalculoIMC(){
-    IMC = peso/(altura*altura);
+public static Float CalculoIMC(float altura,float peso){
+     Float IMC = peso/(altura*altura);
 
     return IMC;
 }
-public Boolean diagnosticarFebre(){
-
+public static Boolean diagnosticarFebre(float temperatura){
+       Boolean febre = temperatura >= 37;   
 return febre;
 }
     

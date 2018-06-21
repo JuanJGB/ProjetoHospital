@@ -5,6 +5,8 @@
  */
 package br.com.juan.objetos;
 
+import java.util.Date;
+
 /**
  *
  * @author SATC
@@ -14,12 +16,14 @@ public class Paciente extends Pessoa {
     private Pessoa responsavel;
     private int numeroSus;
 
-    public Paciente(int id, Pessoa responsavel, int numeroSus, String nome, String telefone, String cpf, String rg, String endereco, String estadoCivil, char sexo) {
-        super(nome, telefone, cpf, rg, endereco, estadoCivil, sexo);
+    public Paciente(int id, Pessoa responsavel, int numeroSus, String nome, String telefone, String cpf, String rg, String endereco, String estadoCivil, Date dataNascimento, char sexo) {
+        super(nome, telefone, cpf, rg, endereco, estadoCivil, dataNascimento, sexo);
         this.id = id;
         this.responsavel = responsavel;
         this.numeroSus = numeroSus;
     }
+
+   
     public int getId() {
         return id;
     }

@@ -5,6 +5,8 @@
  */
 package br.com.juan.objetos;
 
+import java.util.Date;
+
 /**
  *
  * @author SATC
@@ -13,11 +15,13 @@ public class Enfermeira extends Pessoa {
     private int cofen;
     private String setor;
 
-    public Enfermeira(int cofen, String setor, String nome, String telefone, String cpf, String rg, String endereco, String estadoCivil, char sexo) {
-        super(nome, telefone, cpf, rg, endereco, estadoCivil, sexo);
+    public Enfermeira(int cofen, String setor, String nome, String telefone, String cpf, String rg, String endereco, String estadoCivil, Date dataNascimento, char sexo) {
+        super(nome, telefone, cpf, rg, endereco, estadoCivil, dataNascimento, sexo);
         this.cofen = cofen;
         this.setor = setor;
     }
+
+   
 
     public int getCofen() {
         return cofen;
@@ -37,7 +41,7 @@ public class Enfermeira extends Pessoa {
 
     @Override
     public String toString() {
-        return "Enfermeira{" + "cofen: " + cofen + ", setor: " + setor + '}';
+        return "\nCofen: " + cofen + "\nSetor: " + setor+super.toString();
     }
     
     

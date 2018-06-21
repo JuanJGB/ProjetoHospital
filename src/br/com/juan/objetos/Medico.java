@@ -5,6 +5,8 @@
  */
 package br.com.juan.objetos;
 
+import java.util.Date;
+
 /**
  *
  * @author SATC
@@ -13,12 +15,14 @@ public class Medico extends Pessoa {
     private int crm;
     private String especialidade,setor;
 
-    public Medico(int crm, String especialidade, String setor, String nome, String telefone, String cpf, String rg, String endereco, String estadoCivil, char sexo) {
-        super(nome, telefone, cpf, rg, endereco, estadoCivil, sexo);
+    public Medico(int crm, String especialidade, String setor, String nome, String telefone, String cpf, String rg, String endereco, String estadoCivil, Date dataNascimento, char sexo) {
+        super(nome, telefone, cpf, rg, endereco, estadoCivil, dataNascimento, sexo);
         this.crm = crm;
         this.especialidade = especialidade;
         this.setor = setor;
     }
+
+    
 
     public int getCrm() {
         return crm;
@@ -46,7 +50,11 @@ public class Medico extends Pessoa {
 
     @Override
     public String toString() {
-        return "Medico{" + "crm:" + crm + ", especialidade:" + especialidade + ", setor:" + setor + '}';
+        
+        
+        
+        
+        return "Dados do Medico:" + "\nCRM:" + crm + "\nEspecialidade:" + especialidade + "\nSetor:" + setor + super.toString();
     }
     
 

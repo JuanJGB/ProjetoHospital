@@ -14,18 +14,21 @@ import java.util.Date;
 public abstract class Pessoa {
 
     private String nome,telefone, cpf, rg, endereco, estadoCivil; 
-    private Date dataNascimento = new Date();
+    private Date dataNascimento;
     private char sexo;
 
-    public Pessoa(String nome, String telefone, String cpf, String rg, String endereco, String estadoCivil, char sexo) {
+    public Pessoa(String nome, String telefone, String cpf, String rg, String endereco, String estadoCivil, Date dataNascimento, char sexo) {
         this.nome = nome;
         this.telefone = telefone;
         this.cpf = cpf;
         this.rg = rg;
         this.endereco = endereco;
         this.estadoCivil = estadoCivil;
+        this.dataNascimento = dataNascimento;
         this.sexo = sexo;
     }
+
+    
 
     public String getNome() {
         return nome;
@@ -89,6 +92,11 @@ public abstract class Pessoa {
 
     public void setSexo(char sexo) {
         this.sexo = sexo;
+    }
+
+    @Override
+    public String toString() {
+        return "\nNome: " + nome + "\nTelefone: " + telefone + "\nCpf: " + cpf + "\nRG: " + rg + "\nEndereco: " + endereco + "\nEstadoCivil: " + estadoCivil + "\nDataNascimento: " + dataNascimento + "\nSexo: " + sexo ;
     }
     
     

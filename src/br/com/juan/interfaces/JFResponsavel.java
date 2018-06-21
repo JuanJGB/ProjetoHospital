@@ -7,6 +7,11 @@ package br.com.juan.interfaces;
 
 import br.com.juan.objetos.Pessoa;
 import br.com.juan.singleton.SPaciente;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -52,7 +57,8 @@ public class JFResponsavel extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jBCadastroResponsavel = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -221,9 +227,8 @@ public class JFResponsavel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastroResponsavelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroResponsavelActionPerformed
-        Pessoa r = new Pessoa(jTFNomeResponsavel.getText(), jTFTelefoneResponsavel.getText(), jTFCPFResponsavel.getText(),
-                jTFRGResponsavel.getText(), jTFEnderecoResponsavel.getText(), jTFEstadoCivilResponsavel.getText(), jTFSexoResponsavel.getText().toUpperCase().charAt(0)) {
-        };
+      
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
         String nomeResponsavel = this.jTFNomeResponsavel.getText();
         String teleResponsavel = this.jTFTelefoneResponsavel.getText();
         String cpfResponsavel = this.jTFCPFResponsavel.getText();
@@ -231,9 +236,17 @@ public class JFResponsavel extends javax.swing.JFrame {
         String ECResponsavel = this.jTFEstadoCivilResponsavel.getText();
         String RGResponsavel = this.jTFRGResponsavel.getText();
         char SexoResponsavel = this.jTFSexoResponsavel.getText().toUpperCase().charAt(0);
-
+        Date dataNascimentoReponsavel=new Date();
+        try {
+            dataNascimentoReponsavel = sdf.parse(this.jTFDataNascimentoResponsavel.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(JFResponsavel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+         r = new Pessoa(RGResponsavel, teleResponsavel, ECResponsavel, RGResponsavel, RGResponsavel, ECResponsavel, dataNascimentoReponsavel, SexoResponsavel) {
+        };
         SPaciente.getInstance().getResponsavel().add(r);
-
+        
     }//GEN-LAST:event_jBCadastroResponsavelActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

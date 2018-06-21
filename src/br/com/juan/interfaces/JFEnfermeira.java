@@ -60,9 +60,8 @@ public class JFEnfermeira extends javax.swing.JFrame {
         jTFTelefoneEnfermeira = new javax.swing.JTextField();
         jLTituloEnfer = new javax.swing.JLabel();
         jBCadastrarEnfermeira = new javax.swing.JButton();
-        jBEnfermeirasCadastradas = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPCadastroEnfermeira.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -218,13 +217,6 @@ public class JFEnfermeira extends javax.swing.JFrame {
             }
         });
 
-        jBEnfermeirasCadastradas.setText("Mostrar Cadastrados");
-        jBEnfermeirasCadastradas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEnfermeirasCadastradasActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -239,9 +231,7 @@ public class JFEnfermeira extends javax.swing.JFrame {
                         .addComponent(jPCadastroEnfermeira, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jBEnfermeirasCadastradas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBCadastrarEnfermeira)
                 .addGap(18, 18, 18))
         );
@@ -253,9 +243,7 @@ public class JFEnfermeira extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPCadastroEnfermeira, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBCadastrarEnfermeira)
-                    .addComponent(jBEnfermeirasCadastradas))
+                .addComponent(jBCadastrarEnfermeira)
                 .addContainerGap())
         );
 
@@ -268,9 +256,7 @@ public class JFEnfermeira extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFCofenActionPerformed
 
     private void jBCadastrarEnfermeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarEnfermeiraActionPerformed
-        Enfermeira e = new Enfermeira(Integer.parseInt(jTFCofen.getText()), jTFSetorEnfermeira.getText(), jTFNomeEnfermeiro.getText(),
-           jTFTelefoneEnfermeira.getText(), jTFCPFEnfermeira.getText(), jTFRGEnfermeira.getText(), jTFEnderecoEnfermeira.getText(),
-           jTFEstadoCivilEnfermeira.getText(),jTFSexoEnfermeira.getText().toUpperCase().charAt(0));
+        
         SimpleDateFormat sdf= new SimpleDateFormat("dd/mm/yyyy");
         String nomeEnfermeira = this.jTFNomeEnfermeiro.getText();
         String RGEnfermeira =this.jTFRGEnfermeira.getText();
@@ -281,21 +267,17 @@ public class JFEnfermeira extends javax.swing.JFrame {
         String telefone = this.jTFTelefoneEnfermeira.getText();
         String setor = this.jTFSetorEnfermeira.getText();
         String EstadoCivilEnfermeira = this.jTFEstadoCivilEnfermeira.getText();
+        Date DataNascimentoEnfermeira = new Date();
         try {
-            Date DataNascimentoEnfermeira = sdf.parse(this.jTFDataNascimentoEnfermeira.getText());
+             DataNascimentoEnfermeira = sdf.parse(this.jTFDataNascimentoEnfermeira.getText());
         } catch (ParseException ex) {
             Logger.getLogger(JFEnfermeira.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        e = new Enfermeira(Cofen, setor, nomeEnfermeira, telefone, CPFEnfermeira, RGEnfermeira, EnderecoEnfermeira, EstadoCivilEnfermeira, DataNascimentoEnfermeira, sexo);
         SEnfermeira.getInstance().getEnfermeiras().add(e);
        
         
-        
     }//GEN-LAST:event_jBCadastrarEnfermeiraActionPerformed
-
-    private void jBEnfermeirasCadastradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEnfermeirasCadastradasActionPerformed
-        JOptionPane.showMessageDialog(this, SEnfermeira.getInstance().getEnfermeiras().set(SEnfermeira.getInstance().getEnfermeiras().size()-1, e));
-    }//GEN-LAST:event_jBEnfermeirasCadastradasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -335,7 +317,6 @@ public class JFEnfermeira extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCadastrarEnfermeira;
-    private javax.swing.JButton jBEnfermeirasCadastradas;
     private javax.swing.JLabel jDataNascimentoEnfermeira;
     private javax.swing.JLabel jLCPFPaciente;
     private javax.swing.JLabel jLCofen;

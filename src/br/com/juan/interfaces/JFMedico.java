@@ -68,7 +68,8 @@ public class JFMedico extends javax.swing.JFrame {
         jBCadastrarMedico = new javax.swing.JButton();
         jBMedicosCadastrados = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLCadastroMedico.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLCadastroMedico.setText("Cadastro do Médico");
@@ -299,18 +300,24 @@ public class JFMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFCRMMedicoActionPerformed
 
     private void jBCadastrarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarMedicoActionPerformed
-        Medico m = new Medico( Integer.parseInt(jTFCRMMedico.getText()), jTFEspecialidadeMedico.getText(), jTFSetorMedico.getText(), jTFNomeMedico.getText(),
-           jTFTelefoneMedico.getText(), jTFCPFMedico.getText(), jTFRGMedico.getText(), jTFEnderecoMedico.getText(), jTFEstadoCivilMedico.getText(),jTFSexoMedico.getText().toUpperCase().charAt(0) );
+        
         SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
-        String NomeMedico = this.jTFNomeMedico.getText();
+          String NomeMedico = "";
+        try {
+           NomeMedico = this.jTFNomeMedico.getText();    
+        } catch (StringIndexOutOfBoundsException sioobe) {
+            JOptionPane.showMessageDialog(this, "CARACTERES INVÁLIDOS");
+        }
+
         String RGMedico = this.jTFRGMedico.getText();
         String CPFMedico = this.jTFCPFMedico.getText();
         String TelefoneMedico = this.jTFTelefoneMedico.getText();
         String EstadoCivilMedico = this.jTFEstadoCivilMedico.getText();
         String EnderecoMedico = this.jTFEnderecoMedico.getText();
         char SexoMedico = this.jTFSexoMedico.getText().toUpperCase().charAt(0);
+        Date DataNascimentoMedico = new Date();
         try {
-            Date DataNascimentoMedico = sdf.parse(this.jTFDataNascimentoMedico.getText());
+           DataNascimentoMedico = sdf.parse(this.jTFDataNascimentoMedico.getText());
         } catch (ParseException ex) {
             Logger.getLogger(JFMedico.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -318,13 +325,19 @@ public class JFMedico extends javax.swing.JFrame {
         int crm = Integer.parseInt(this.jTFCRMMedico.getText());
         String setor = this.jTFSetorMedico.getText();
       
+        m = new Medico(crm, especialidade, NomeMedico, TelefoneMedico, CPFMedico, RGMedico, EnderecoMedico, RGMedico, EstadoCivilMedico, DataNascimentoMedico, SexoMedico);
         SMedico.getInstance().getMedicos().add(m);
         
 
     }//GEN-LAST:event_jBCadastrarMedicoActionPerformed
 
     private void jBMedicosCadastradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMedicosCadastradosActionPerformed
-          JOptionPane.showMessageDialog(this, SMedico.getInstance().getMedicos().set( SMedico.getInstance().getMedicos().size()-1, m));
+        String Medicos = "";
+        for (Medico med : SMedico.getInstance().getMedicos()) {
+            Medicos+= ""+med.toString()+".";    
+        }
+  
+        JOptionPane.showMessageDialog(this, Medicos);
     }//GEN-LAST:event_jBMedicosCadastradosActionPerformed
 
     /**

@@ -328,14 +328,11 @@ public class JFMedico extends javax.swing.JFrame {
         m = new Medico(crm, especialidade, NomeMedico, TelefoneMedico, CPFMedico, RGMedico, EnderecoMedico, RGMedico, EstadoCivilMedico, DataNascimentoMedico, SexoMedico);
         SMedico.getInstance().getMedicos().add(m);
         
-
     }//GEN-LAST:event_jBCadastrarMedicoActionPerformed
 
     private void jBMedicosCadastradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMedicosCadastradosActionPerformed
         String Medicos = "";
-        for (Medico med : SMedico.getInstance().getMedicos()) {
-            Medicos+= ""+med.toString()+".";    
-        }
+        Medicos = SMedico.getInstance().getMedicos().stream().map((med) -> ""+med.toString()+".").reduce(Medicos, String::concat);
   
         JOptionPane.showMessageDialog(this, Medicos);
     }//GEN-LAST:event_jBMedicosCadastradosActionPerformed

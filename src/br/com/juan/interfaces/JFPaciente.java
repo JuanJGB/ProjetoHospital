@@ -86,6 +86,11 @@ public class JFPaciente extends javax.swing.JFrame {
         jTFEstadoCivilPaciente.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
         jTFnumSUS.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jTFnumSUS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFnumSUSActionPerformed(evt);
+            }
+        });
 
         jLNumSus.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLNumSus.setText("Número SUS:");
@@ -133,6 +138,7 @@ public class JFPaciente extends javax.swing.JFrame {
 
         jTFTelefonePaciente.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
+        jCBResponsaveis.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jCBResponsaveis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione>", "Sim", "Não" }));
         jCBResponsaveis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,15 +169,15 @@ public class JFPaciente extends javax.swing.JFrame {
                                     .addComponent(jTFRGpaciente)
                                     .addComponent(jTFNomePaciente, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addGroup(jPCadastroPacienteLayout.createSequentialGroup()
-                                .addGap(33, 33, 33)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLCPFPaciente)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTFCPFpaciente))
+                                .addComponent(jTFCPFpaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCadastroPacienteLayout.createSequentialGroup()
-                                .addGap(0, 26, Short.MAX_VALUE)
+                                .addGap(0, 18, Short.MAX_VALUE)
                                 .addComponent(jLResponsavel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCBResponsaveis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jCBResponsaveis, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPCadastroPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLSexoPaciente, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -196,13 +202,13 @@ public class JFPaciente extends javax.swing.JFrame {
         jPCadastroPacienteLayout.setVerticalGroup(
             jPCadastroPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPCadastroPacienteLayout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(jPCadastroPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFIdPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLIDPaciente)
                     .addComponent(jLNomePaciente)
                     .addComponent(jTFNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addGroup(jPCadastroPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLRGPaciente)
                     .addComponent(jLTelePaciente)
@@ -247,7 +253,7 @@ public class JFPaciente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jPCadastroPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 9, Short.MAX_VALUE))
+                .addGap(0, 13, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,18 +262,18 @@ public class JFPaciente extends javax.swing.JFrame {
                         .addGap(92, 92, 92))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jBCadastrarPaciente)
-                        .addGap(20, 20, 20))))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(6, 6, 6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLCadastroPaciente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPCadastroPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBCadastrarPaciente)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(5, 5, 5))
         );
 
         pack();
@@ -279,26 +285,54 @@ public class JFPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFIdPacienteActionPerformed
 
     private void jBCadastrarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarPacienteActionPerformed
-        String NomePaciente, RGPaciente, CPFpaciente, TelefonePaciente, EstadoCivilPaciente, EnderecoPaciente;
+        String NomePaciente = "", RGPaciente = "", CPFpaciente = "", TelefonePaciente = "",
+                EstadoCivilPaciente = "", EnderecoPaciente = "";
+        int numeroSus = 0, IdPaciente = 0;
+        char SexoPaciente = 0;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
-        NomePaciente = this.jTFNomePaciente.getText();
+        try {
+            NomePaciente = this.jTFNomePaciente.getText();
+        } catch (StringIndexOutOfBoundsException sioobe) {
+            JOptionPane.showMessageDialog(this, "CARACTERES INVÁLIDOS");
+        }
         RGPaciente = this.jTFRGpaciente.getText();
         CPFpaciente = this.jTFCPFpaciente.getText();
         TelefonePaciente = this.jTFTelefonePaciente.getText();
-        EstadoCivilPaciente = this.jTFEstadoCivilPaciente.getText();
-        EnderecoPaciente = this.jTFEnderecoPaciente.getText();
-        char SexoPaciente = this.jTFSexoPaciente.getText().toUpperCase().charAt(0);
+        try {
+            EstadoCivilPaciente = this.jTFEstadoCivilPaciente.getText();
+        } catch (StringIndexOutOfBoundsException sioobe) {
+            JOptionPane.showMessageDialog(this, "CARACTERES INVÁLIDOS");
+        }
+        try {
+            EnderecoPaciente = this.jTFEnderecoPaciente.getText();
+        } catch (StringIndexOutOfBoundsException sioobe) {
+            JOptionPane.showMessageDialog(this, "CARACTERES INVÁLIDOS" + sioobe);
+        }
+        try {
+            SexoPaciente = this.jTFSexoPaciente.getText().toUpperCase().charAt(0);
+        } catch (Exception e) {
+
+        }
+
         Date dataNascimentoPaciente = new Date();
         try {
             dataNascimentoPaciente = sdf.parse(this.jTFDataNascimentoPaciente.getText());
         } catch (ParseException ex) {
             Logger.getLogger(JFPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
-        int IdPaciente = Integer.parseInt(this.jTFIdPaciente.getText());
-        int numeroSus = Integer.parseInt(this.jLNumSus.getText());
+        try {
+            IdPaciente = Integer.parseInt(this.jTFIdPaciente.getText());
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(this, "Apenas numeros");
+        }
 
         p = new Paciente(IdPaciente, r, numeroSus, NomePaciente, TelefonePaciente, CPFpaciente, RGPaciente, EnderecoPaciente, EstadoCivilPaciente, dataNascimentoPaciente, SexoPaciente);
-        SPaciente.getInstance().getPacientes().add(p);
+        if ((jTFIdPaciente.getText().isEmpty())&& (jTFnumSUS.getText().isEmpty()) && (jTFNomePaciente.getText().isEmpty()) && (jTFTelefonePaciente.getText().isEmpty()) && (jTFCPFpaciente.getText().isEmpty())
+                && (jTFRGpaciente.getText().isEmpty()) && ("".equals(EnderecoPaciente)) && (jTFEstadoCivilPaciente.getText().isEmpty()) && (jTFDataNascimentoPaciente.getText().isEmpty()) && (jTFSexoPaciente.getText().isEmpty())) {
+            JOptionPane.showMessageDialog(this, "Preencha os campos");
+        } else {
+            SPaciente.getInstance().getPacientes().add(p);
+        }
 
     }//GEN-LAST:event_jBCadastrarPacienteActionPerformed
 
@@ -310,11 +344,16 @@ public class JFPaciente extends javax.swing.JFrame {
             case 1:
                 new JFResponsavel().setVisible(true);
                 break;
-            case 2:
-                JOptionPane.showMessageDialog(this, "OK");
-                break;
         }      // TODO add your handling code here:
     }//GEN-LAST:event_jCBResponsaveisActionPerformed
+
+    private void jTFnumSUSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFnumSUSActionPerformed
+        int numeroSus = 0;
+        try {
+            numeroSus = Integer.parseInt(this.jLNumSus.getText());
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(this, "Apenas numeros");
+        }    }//GEN-LAST:event_jTFnumSUSActionPerformed
 
     /**
      * @param args the command line arguments

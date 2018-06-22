@@ -13,10 +13,11 @@ import java.util.List;
  * @author SATC
  */
 public class Triagem {
+
     private Enfermeira enfermeira;
     private Paciente paciente;
-    private String pressao,sintoma;
-    private float peso,altura,IMC,temperatura;
+    private String pressao, sintoma;
+    private float peso, altura, IMC, temperatura;
     private boolean febre;
     private List<String> alergias;
 
@@ -30,21 +31,32 @@ public class Triagem {
         this.IMC = CalculoIMC(altura, peso);
         this.temperatura = temperatura;
         this.febre = febre;
-        alergias = new ArrayList<>();
+        this.alergias = new ArrayList<>();
     }
-public static Float CalculoIMC(float altura,float peso){
-     Float IMC = peso/(altura*altura);
+  
 
-    return IMC;
-}
-public static Boolean diagnosticarFebre(float temperatura){
-       Boolean febre = temperatura >= 37;   
-return febre;
-}
-    
+    public List<String> getAlergias() {
+        return alergias;
+    }
+
+    public void setAlergias(List<String> alergias) {
+        this.alergias = alergias;
+    }
+
+    public static Float CalculoIMC(float altura, float peso) {
+        Float IMC = peso / (altura * altura);
+
+        return IMC;
+    }
+
+    public static Boolean diagnosticarFebre(float temperatura) {
+        Boolean febre = temperatura >= 37;
+        return febre;
+    }
+
     @Override
     public String toString() {
-        return "Triagem: " + "\nEnfermeira: " + enfermeira + "\nPaciente:" + paciente + "\nPressao:" + pressao + "\nSintoma=" + sintoma + "\nPeso=" + peso + "\nAltura=" + altura + "\nIMC=" + IMC + "\nTemperatura=" + temperatura + "\nFebre=" + febre ;
+        return "Triagem: " + "\nEnfermeira: " + enfermeira + "\nPaciente:" + paciente + "\nPressao:" + pressao + "\nSintoma=" + sintoma + "\nPeso=" + peso + "\nAltura=" + altura + "\nIMC=" + IMC + "\nTemperatura=" + temperatura + "\nFebre=" + febre;
     }
 
     public Enfermeira getEnfermeira() {
@@ -118,8 +130,5 @@ return febre;
     public void setFebre(boolean febre) {
         this.febre = febre;
     }
-    
-    
-    
-    
+
 }

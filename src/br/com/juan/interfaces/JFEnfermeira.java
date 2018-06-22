@@ -276,7 +276,7 @@ public class JFEnfermeira extends javax.swing.JFrame {
         e = new Enfermeira(Cofen, setor, nomeEnfermeira, telefone, CPFEnfermeira, RGEnfermeira, EnderecoEnfermeira, EstadoCivilEnfermeira, DataNascimentoEnfermeira, sexo);
         SEnfermeira.getInstance().getEnfermeiras().add(e);
        
-        
+        dispose();
     }//GEN-LAST:event_jBCadastrarEnfermeiraActionPerformed
 
     /**

@@ -22,6 +22,16 @@ public class STriagem {
     
     private STriagem() {
     }
+
+    @Override
+    public String toString() {
+        
+        
+        return "Alergias" + '}';
+        
+        
+        
+    }
     
     public static STriagem getInstance() {
         return STriagemHolder.INSTANCE;

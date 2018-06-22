@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -227,15 +228,22 @@ public class JFResponsavel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastroResponsavelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroResponsavelActionPerformed
-      
+        String nomeResponsavel = null,teleResponsavel,cpfResponsavel,enderecoResponsavel,ECResponsavel = null,RGResponsavel;
+        char SexoResponsavel;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
-        String nomeResponsavel = this.jTFNomeResponsavel.getText();
-        String teleResponsavel = this.jTFTelefoneResponsavel.getText();
-        String cpfResponsavel = this.jTFCPFResponsavel.getText();
-        String enderecoResponsavel = this.jTFEnderecoResponsavel.getText();
-        String ECResponsavel = this.jTFEstadoCivilResponsavel.getText();
-        String RGResponsavel = this.jTFRGResponsavel.getText();
-        char SexoResponsavel = this.jTFSexoResponsavel.getText().toUpperCase().charAt(0);
+        try {
+            ECResponsavel = this.jTFEstadoCivilResponsavel.getText();
+            nomeResponsavel = this.jTFNomeResponsavel.getText();
+        } catch (StringIndexOutOfBoundsException sioobe) {
+            JOptionPane.showMessageDialog(this, "Caracteres inválidos!");
+        }
+         
+         teleResponsavel = this.jTFTelefoneResponsavel.getText();
+         cpfResponsavel = this.jTFCPFResponsavel.getText();
+         enderecoResponsavel = this.jTFEnderecoResponsavel.getText();
+         
+         RGResponsavel = this.jTFRGResponsavel.getText();
+         SexoResponsavel = this.jTFSexoResponsavel.getText().toUpperCase().charAt(0);
         Date dataNascimentoReponsavel=new Date();
         try {
             dataNascimentoReponsavel = sdf.parse(this.jTFDataNascimentoResponsavel.getText());
@@ -243,10 +251,10 @@ public class JFResponsavel extends javax.swing.JFrame {
             Logger.getLogger(JFResponsavel.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-         r = new Pessoa(RGResponsavel, teleResponsavel, ECResponsavel, RGResponsavel, RGResponsavel, ECResponsavel, dataNascimentoReponsavel, SexoResponsavel) {
+         r = new Pessoa(nomeResponsavel, teleResponsavel, cpfResponsavel, RGResponsavel, RGResponsavel, ECResponsavel, dataNascimentoReponsavel, SexoResponsavel) {
         };
         SPaciente.getInstance().getResponsavel().add(r);
-        
+        dispose();
     }//GEN-LAST:event_jBCadastroResponsavelActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

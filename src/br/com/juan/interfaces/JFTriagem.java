@@ -16,6 +16,7 @@ import br.com.juan.singleton.SPaciente;
 import br.com.juan.singleton.STriagem;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,6 +34,7 @@ public class JFTriagem extends javax.swing.JFrame {
      */
     public JFTriagem() {
         initComponents();
+        
     }
 
     /**
@@ -63,11 +65,12 @@ public class JFTriagem extends javax.swing.JFrame {
         jBAddAlergias = new javax.swing.JButton();
         jTFEnfermeira = new javax.swing.JTextField();
         jTFPaciente = new javax.swing.JTextField();
-        jTFAlergias = new javax.swing.JTextField();
+        jLAlergias = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jBCadastrarTriagem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPTriagem.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -99,22 +102,16 @@ public class JFTriagem extends javax.swing.JFrame {
         jLabel14.setText("Pressão:");
 
         jTFAltura.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTFAltura.setText("     ");
 
         jTFPeso.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTFPeso.setText(" ");
 
         jTFTemperatura.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTFTemperatura.setText(" ");
 
         jTFAlergia.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTFAlergia.setText("                ");
 
         jTFSintoma.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTFSintoma.setText("                ");
 
         jTFPressao.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTFPressao.setText("    ");
 
         jBAddAlergias.setText("+");
         jBAddAlergias.addActionListener(new java.awt.event.ActionListener() {
@@ -124,21 +121,11 @@ public class JFTriagem extends javax.swing.JFrame {
         });
 
         jTFEnfermeira.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTFEnfermeira.setText("    ");
 
         jTFPaciente.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTFPaciente.setText("    ");
         jTFPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTFPacienteActionPerformed(evt);
-            }
-        });
-
-        jTFAlergias.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jTFAlergias.setText("   ");
-        jTFAlergias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFAlergiasActionPerformed(evt);
             }
         });
 
@@ -165,35 +152,32 @@ public class JFTriagem extends javax.swing.JFrame {
                     .addGroup(jPTriagemLayout.createSequentialGroup()
                         .addGroup(jPTriagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPTriagemLayout.createSequentialGroup()
-                                .addGroup(jPTriagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPTriagemLayout.createSequentialGroup()
-                                        .addGap(26, 26, 26)
-                                        .addComponent(jLAltura)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPTriagemLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLPeso)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                                .addGroup(jPTriagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTFPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTFAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(26, 26, 26)
+                                .addComponent(jLAltura)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPTriagemLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPTriagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLADD)
-                                    .addGroup(jPTriagemLayout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(jTFAlergia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jBAddAlergias, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(8, 8, 8)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLPeso)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGroup(jPTriagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTFPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTFAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPTriagemLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jLAlergia)
                         .addGap(18, 18, 18)
-                        .addComponent(jTFAlergias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jLADD))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPTriagemLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPTriagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPTriagemLayout.createSequentialGroup()
+                                .addComponent(jTFAlergia, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBAddAlergias, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8))
+                            .addGroup(jPTriagemLayout.createSequentialGroup()
+                                .addComponent(jLAlergia)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLAlergias, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPTriagemLayout.setVerticalGroup(
             jPTriagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,30 +195,31 @@ public class JFTriagem extends javax.swing.JFrame {
                     .addComponent(jLPaciente)
                     .addComponent(jTFPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPTriagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPTriagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTFTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLTemperatura))
-                    .addComponent(jLADD, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPTriagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTFTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLTemperatura)
+                    .addComponent(jLADD))
                 .addGroup(jPTriagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPTriagemLayout.createSequentialGroup()
                         .addGap(18, 18, Short.MAX_VALUE)
                         .addGroup(jPTriagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
-                            .addComponent(jTFSintoma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFAlergia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBAddAlergias, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTFSintoma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPTriagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14)
                             .addComponent(jTFPressao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(38, Short.MAX_VALUE))
+                        .addContainerGap(40, Short.MAX_VALUE))
                     .addGroup(jPTriagemLayout.createSequentialGroup()
-                        .addGap(52, 52, 52)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPTriagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTFAlergia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBAddAlergias, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(11, 11, 11)
+                        .addGroup(jPTriagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLAlergia)
-                            .addComponent(jTFAlergias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLAlergias, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(22, Short.MAX_VALUE))))
         );
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 38)); // NOI18N
@@ -282,33 +267,41 @@ public class JFTriagem extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFPacienteActionPerformed
 
-    private void jTFAlergiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFAlergiasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFAlergiasActionPerformed
-
     private void jBAddAlergiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddAlergiasActionPerformed
-    
+        
+        String allAlergias = "";
+        for (String al :tr.getAlergias()) {
+            allAlergias += tr.getAlergias().indexOf(al) + " . " + tr.getAlergias()+ "\n";
+        } 
+        if (!jTFAlergia.getText().equals("")) {            
+            tr.getAlergias().add(jTFAlergia.getText());
+            jLAlergias.setText(allAlergias);
+        } else {
+            JOptionPane.showMessageDialog(this, "Campo em branco, favor digitar! ");
+        }
+        
     }//GEN-LAST:event_jBAddAlergiasActionPerformed
 
     private void jBCadastrarTriagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarTriagemActionPerformed
-   
-    float temperatura = Float.parseFloat(this.jTFTemperatura.getText());
-    float IMC;
-    float altura = Float.parseFloat(this.jTFAltura.getText());
-    float peso = Float.parseFloat(this.jTFPeso.getText());
-    String Sintoma = this.jTFSintoma.getText();
-    List<String> alergias = new ArrayList();
-    String pressao = this.jTFPressao.getText();
-    boolean febre;
-    diagnosticarFebre(temperatura);
-    CalculoIMC(altura, peso);
-    IMC = CalculoIMC(altura, peso);
-     tr = new Triagem(e, p, pressao, Sintoma, peso, altura, IMC, temperatura,rootPaneCheckingEnabled);
-    
-   STriagem.getInstance().getTriagens().add(tr);
-    
-    
-       
+        
+        float temperatura = Float.parseFloat(this.jTFTemperatura.getText());
+        float IMC;
+        float altura = Float.parseFloat(this.jTFAltura.getText());
+        float peso = Float.parseFloat(this.jTFPeso.getText());
+        String Sintoma = this.jTFSintoma.getText();
+        List<String> alergias = new ArrayList();
+        String pressao = this.jTFPressao.getText();
+        boolean febre;
+        diagnosticarFebre(temperatura);
+        CalculoIMC(altura, peso);
+        IMC = CalculoIMC(altura, peso);
+        
+        tr = new Triagem(e, p, pressao, Sintoma, peso, altura, IMC, temperatura, rootPaneCheckingEnabled);
+         
+        
+        STriagem.getInstance().getTriagens().add(tr);
+        
+
     }//GEN-LAST:event_jBCadastrarTriagemActionPerformed
 
     /**
@@ -352,6 +345,7 @@ public class JFTriagem extends javax.swing.JFrame {
     private javax.swing.JButton jBCadastrarTriagem;
     private javax.swing.JLabel jLADD;
     private javax.swing.JLabel jLAlergia;
+    private javax.swing.JLabel jLAlergias;
     private javax.swing.JLabel jLAltura;
     private javax.swing.JLabel jLEnfermeira;
     private javax.swing.JLabel jLPaciente;
@@ -362,7 +356,6 @@ public class JFTriagem extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JPanel jPTriagem;
     private javax.swing.JTextField jTFAlergia;
-    private javax.swing.JTextField jTFAlergias;
     private javax.swing.JTextField jTFAltura;
     private javax.swing.JTextField jTFEnfermeira;
     private javax.swing.JTextField jTFPaciente;

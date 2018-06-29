@@ -13,6 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.zip.DataFormatException;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,7 +24,8 @@ import javax.swing.JOptionPane;
 public class JFPaciente extends javax.swing.JFrame {
 
     Paciente p;
-    Pessoa r;
+      Pessoa r ;
+  
 
     /**
      * Creates new form Principal
@@ -30,6 +33,7 @@ public class JFPaciente extends javax.swing.JFrame {
     public JFPaciente() {
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -285,7 +289,8 @@ public class JFPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFIdPacienteActionPerformed
 
     private void jBCadastrarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarPacienteActionPerformed
-        String NomePaciente = "", RGPaciente = "", CPFpaciente = "", TelefonePaciente = "",
+
+        String NomePaciente = "", RGPaciente, CPFpaciente, TelefonePaciente,
                 EstadoCivilPaciente = "", EnderecoPaciente = "";
         int numeroSus = 0, IdPaciente = 0;
         char SexoPaciente = 0;
@@ -299,15 +304,22 @@ public class JFPaciente extends javax.swing.JFrame {
         CPFpaciente = this.jTFCPFpaciente.getText();
         TelefonePaciente = this.jTFTelefonePaciente.getText();
         try {
+            numeroSus = Integer.parseInt(this.jTFnumSUS.getText());
+        } catch (NumberFormatException nfe) {
+             JOptionPane.showMessageDialog(this, "APENAS NÚMEROS");
+        }
+        try {
             EstadoCivilPaciente = this.jTFEstadoCivilPaciente.getText();
         } catch (StringIndexOutOfBoundsException sioobe) {
+            
             JOptionPane.showMessageDialog(this, "CARACTERES INVÁLIDOS");
         }
         try {
             EnderecoPaciente = this.jTFEnderecoPaciente.getText();
         } catch (StringIndexOutOfBoundsException sioobe) {
-            JOptionPane.showMessageDialog(this, "CARACTERES INVÁLIDOS" + sioobe);
+            JOptionPane.showMessageDialog(this, "CARACTERES INVÁLIDOS");
         }
+
         try {
             SexoPaciente = this.jTFSexoPaciente.getText().toUpperCase().charAt(0);
         } catch (Exception e) {
@@ -315,24 +327,34 @@ public class JFPaciente extends javax.swing.JFrame {
         }
 
         Date dataNascimentoPaciente = new Date();
-        try {
-            dataNascimentoPaciente = sdf.parse(this.jTFDataNascimentoPaciente.getText());
-        } catch (ParseException ex) {
-            Logger.getLogger(JFPaciente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            IdPaciente = Integer.parseInt(this.jTFIdPaciente.getText());
-        } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(this, "Apenas numeros");
+        if (!jTFDataNascimentoPaciente.getText().isEmpty()) {
+            try {
+                dataNascimentoPaciente = sdf.parse(this.jTFDataNascimentoPaciente.getText());
+            } catch (ParseException ex) {
+                Logger.getLogger(JFPaciente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
-        p = new Paciente(IdPaciente, r, numeroSus, NomePaciente, TelefonePaciente, CPFpaciente, RGPaciente, EnderecoPaciente, EstadoCivilPaciente, dataNascimentoPaciente, SexoPaciente);
-        if ((jTFIdPaciente.getText().isEmpty())&& (jTFnumSUS.getText().isEmpty()) && (jTFNomePaciente.getText().isEmpty()) && (jTFTelefonePaciente.getText().isEmpty()) && (jTFCPFpaciente.getText().isEmpty())
-                && (jTFRGpaciente.getText().isEmpty()) && ("".equals(EnderecoPaciente)) && (jTFEstadoCivilPaciente.getText().isEmpty()) && (jTFDataNascimentoPaciente.getText().isEmpty()) && (jTFSexoPaciente.getText().isEmpty())) {
+        if (!jTFIdPaciente.getText().isEmpty()) {
+            try {
+                IdPaciente = Integer.parseInt(this.jTFIdPaciente.getText());
+            } catch (NumberFormatException nfe) {
+                JOptionPane.showMessageDialog(this, "Apenas numeros");
+            }
+        }
+       
+        
+        p = new Paciente(IdPaciente, this.r, numeroSus, NomePaciente, TelefonePaciente, CPFpaciente, RGPaciente, EnderecoPaciente, EstadoCivilPaciente, dataNascimentoPaciente, SexoPaciente);
+        if ((jTFIdPaciente.getText().isEmpty()) || (jTFnumSUS.getText().isEmpty()) ||(jTFNomePaciente.getText().isEmpty()) || (jTFTelefonePaciente.getText().isEmpty()) || (jTFCPFpaciente.getText().isEmpty())
+                || (jTFRGpaciente.getText().isEmpty()) || (jTFEnderecoPaciente.getText().isEmpty()) || (jTFEstadoCivilPaciente.getText().isEmpty()) || (jTFDataNascimentoPaciente.getText().isEmpty()) || (jTFSexoPaciente.getText().isEmpty())
+                || (r == null)) {
             JOptionPane.showMessageDialog(this, "Preencha os campos");
+
         } else {
+            
             SPaciente.getInstance().getPacientes().add(p);
         }
+
 
     }//GEN-LAST:event_jBCadastrarPacienteActionPerformed
 

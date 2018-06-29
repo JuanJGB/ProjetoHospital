@@ -27,8 +27,6 @@ public class JFMedico extends javax.swing.JFrame {
      */
     public JFMedico() {
         initComponents();
-       
-        
 
     }
 
@@ -300,11 +298,12 @@ public class JFMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFCRMMedicoActionPerformed
 
     private void jBCadastrarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarMedicoActionPerformed
-        
+
         SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
-          String NomeMedico = "";
+        String NomeMedico = "", especialidade = "",setor = "", EstadoCivilMedico = "";
+        int crm = 0;
         try {
-           NomeMedico = this.jTFNomeMedico.getText();    
+            NomeMedico = this.jTFNomeMedico.getText();
         } catch (StringIndexOutOfBoundsException sioobe) {
             JOptionPane.showMessageDialog(this, "CARACTERES INVÁLIDOS");
         }
@@ -312,28 +311,63 @@ public class JFMedico extends javax.swing.JFrame {
         String RGMedico = this.jTFRGMedico.getText();
         String CPFMedico = this.jTFCPFMedico.getText();
         String TelefoneMedico = this.jTFTelefoneMedico.getText();
-        String EstadoCivilMedico = this.jTFEstadoCivilMedico.getText();
         String EnderecoMedico = this.jTFEnderecoMedico.getText();
-        char SexoMedico = this.jTFSexoMedico.getText().toUpperCase().charAt(0);
-        Date DataNascimentoMedico = new Date();
         try {
-           DataNascimentoMedico = sdf.parse(this.jTFDataNascimentoMedico.getText());
-        } catch (ParseException ex) {
-            Logger.getLogger(JFMedico.class.getName()).log(Level.SEVERE, null, ex);
+            EstadoCivilMedico = this.jTFEstadoCivilMedico.getText();
+        } catch (StringIndexOutOfBoundsException sioobe) {
+            JOptionPane.showMessageDialog(this, "CARACTERES INVÁLIDOS");
         }
-        String especialidade = this.jTFEspecialidadeMedico.getText();
-        int crm = Integer.parseInt(this.jTFCRMMedico.getText());
-        String setor = this.jTFSetorMedico.getText();
-      
-        m = new Medico(crm, especialidade, NomeMedico, TelefoneMedico, CPFMedico, RGMedico, EnderecoMedico, RGMedico, EstadoCivilMedico, DataNascimentoMedico, SexoMedico);
-        SMedico.getInstance().getMedicos().add(m);
-        
+
+        char SexoMedico = 0;
+        if (!jTFSexoMedico.getText().isEmpty()) {
+            try {
+                SexoMedico = this.jTFSexoMedico.getText().toUpperCase().charAt(0);
+            } catch (StringIndexOutOfBoundsException sioobe) {
+                JOptionPane.showMessageDialog(this, "CARACTERe INVÁLIDO");
+            }
+        }
+
+        Date DataNascimentoMedico = new Date();
+          if (!jTFDataNascimentoMedico.getText().isEmpty()){
+           try {
+               DataNascimentoMedico = sdf.parse(this.jTFDataNascimentoMedico.getText());
+           } catch (ParseException ex) {
+               Logger.getLogger(JFMedico.class.getName()).log(Level.SEVERE, null, ex);
+           }}
+       
+        try {
+            especialidade = this.jTFEspecialidadeMedico.getText();
+        } catch (StringIndexOutOfBoundsException sioobe) {
+            JOptionPane.showMessageDialog(this, "CARACTERES INVÁLIDOS");
+        }
+
+        if (!jTFCRMMedico.getText().isEmpty()) {
+            try {
+                crm = Integer.parseInt(this.jTFCRMMedico.getText());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Apenas numeros");
+            }
+        }
+
+        try {
+            setor = this.jTFSetorMedico.getText();
+        } catch (StringIndexOutOfBoundsException sioobe) {
+            JOptionPane.showMessageDialog(this, "CARACTERES INVÁLIDOS");
+        }
+        m = new Medico(crm, especialidade, setor, NomeMedico, TelefoneMedico, CPFMedico, RGMedico, EnderecoMedico, EstadoCivilMedico, DataNascimentoMedico, SexoMedico);
+        if ((jTFCRMMedico.getText().isEmpty())||(jTFEspecialidadeMedico.getText().isEmpty()) ||(jTFNomeMedico.getText().isEmpty()) || (jTFTelefoneMedico.getText().isEmpty()) || (jTFCPFMedico.getText().isEmpty())
+                || (jTFRGMedico.getText().isEmpty()) || (jTFEnderecoMedico.getText().isEmpty()) || (jTFEstadoCivilMedico.getText().isEmpty()) || (jTFDataNascimentoMedico.getText().isEmpty()) || (jTFSexoMedico.getText().isEmpty())) {
+            JOptionPane.showMessageDialog(this, "Preencha os campos");
+        } else {
+
+            SMedico.getInstance().getMedicos().add(m);
+        }
     }//GEN-LAST:event_jBCadastrarMedicoActionPerformed
 
     private void jBMedicosCadastradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMedicosCadastradosActionPerformed
         String Medicos = "";
-        Medicos = SMedico.getInstance().getMedicos().stream().map((med) -> ""+med.toString()+".").reduce(Medicos, String::concat);
-  
+        Medicos = SMedico.getInstance().getMedicos().stream().map((med) -> "" + med.toString() + ".").reduce(Medicos, String::concat);
+
         JOptionPane.showMessageDialog(this, Medicos);
     }//GEN-LAST:event_jBMedicosCadastradosActionPerformed
 

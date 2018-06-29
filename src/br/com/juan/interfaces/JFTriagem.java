@@ -34,7 +34,8 @@ public class JFTriagem extends javax.swing.JFrame {
      */
     public JFTriagem() {
         initComponents();
-        
+       
+         
     }
 
     /**
@@ -268,14 +269,11 @@ public class JFTriagem extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFPacienteActionPerformed
 
     private void jBAddAlergiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddAlergiasActionPerformed
-        
-        String allAlergias = "";
-        for (String al :tr.getAlergias()) {
-            allAlergias += tr.getAlergias().indexOf(al) + " . " + tr.getAlergias()+ "\n";
-        } 
+       
+
         if (!jTFAlergia.getText().equals("")) {            
-            tr.getAlergias().add(jTFAlergia.getText());
-            jLAlergias.setText(allAlergias);
+          tr.getAlergias().add(jTFAlergia.getText()); 
+            jLAlergias.setText(tr.getAlergias().toString());
         } else {
             JOptionPane.showMessageDialog(this, "Campo em branco, favor digitar! ");
         }
@@ -289,7 +287,7 @@ public class JFTriagem extends javax.swing.JFrame {
         float altura = Float.parseFloat(this.jTFAltura.getText());
         float peso = Float.parseFloat(this.jTFPeso.getText());
         String Sintoma = this.jTFSintoma.getText();
-        List<String> alergias = new ArrayList();
+        
         String pressao = this.jTFPressao.getText();
         boolean febre;
         diagnosticarFebre(temperatura);
@@ -297,11 +295,9 @@ public class JFTriagem extends javax.swing.JFrame {
         IMC = CalculoIMC(altura, peso);
         
         tr = new Triagem(e, p, pressao, Sintoma, peso, altura, IMC, temperatura, rootPaneCheckingEnabled);
-         
         
         STriagem.getInstance().getTriagens().add(tr);
         
-
     }//GEN-LAST:event_jBCadastrarTriagemActionPerformed
 
     /**

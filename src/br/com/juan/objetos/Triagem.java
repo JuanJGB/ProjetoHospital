@@ -56,7 +56,12 @@ public class Triagem {
 
     @Override
     public String toString() {
-        return "Triagem: " + "\nEnfermeira: " + enfermeira + "\nPaciente:" + paciente + "\nPressao:" + pressao + "\nSintoma=" + sintoma + "\nPeso=" + peso + "\nAltura=" + altura + "\nIMC=" + IMC + "\nTemperatura=" + temperatura + "\nFebre=" + febre;
+        
+        String todasAlergias = "";
+        for (String alergia : alergias) {
+            todasAlergias += alergias.indexOf(alergia) + " . " + alergia + "\n";
+        }   
+        return "Triagem: " + "\nEnfermeira: " + enfermeira + "\nPaciente:" + paciente + "\nPressao:" + pressao + "\nSintoma=" + sintoma + "\nPeso=" + peso + "\nAltura=" + altura + "\nIMC=" + IMC + "\nTemperatura=" + temperatura + "\nFebre=" + febre+"\nAlergias: "+todasAlergias;
     }
 
     public Enfermeira getEnfermeira() {

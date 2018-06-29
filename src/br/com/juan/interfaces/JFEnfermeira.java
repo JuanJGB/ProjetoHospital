@@ -274,9 +274,16 @@ public class JFEnfermeira extends javax.swing.JFrame {
             Logger.getLogger(JFEnfermeira.class.getName()).log(Level.SEVERE, null, ex);
         }
         e = new Enfermeira(Cofen, setor, nomeEnfermeira, telefone, CPFEnfermeira, RGEnfermeira, EnderecoEnfermeira, EstadoCivilEnfermeira, DataNascimentoEnfermeira, sexo);
+         if ((jTFNomeEnfermeiro.getText().isEmpty()) || (jTFTelefoneEnfermeira.getText().isEmpty()) || (jTFCPFEnfermeira.getText().isEmpty())
+                || (jTFRGEnfermeira.getText().isEmpty()) || (jTFEnderecoEnfermeira.getText().isEmpty()) || (jTFEstadoCivilEnfermeira.getText().isEmpty()) || (jTFDataNascimentoEnfermeira.getText().isEmpty()) || (jTFSexoEnfermeira.getText().isEmpty()))
+              {
+            JOptionPane.showMessageDialog(this, "Preencha os campos");
+
+        } else {
         SEnfermeira.getInstance().getEnfermeiras().add(e);
        
         dispose();
+         }
     }//GEN-LAST:event_jBCadastrarEnfermeiraActionPerformed
 
     /**

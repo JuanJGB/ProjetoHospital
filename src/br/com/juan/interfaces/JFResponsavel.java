@@ -5,6 +5,7 @@
  */
 package br.com.juan.interfaces;
 
+import br.com.juan.objetos.Paciente;
 import br.com.juan.objetos.Pessoa;
 import br.com.juan.singleton.SPaciente;
 import java.text.ParseException;
@@ -20,8 +21,8 @@ import javax.swing.JOptionPane;
  */
 public class JFResponsavel extends javax.swing.JFrame {
 
+    Paciente p;
     Pessoa r;
-
     /**
      * Creates new form JFResponsavel
      */
@@ -228,7 +229,7 @@ public class JFResponsavel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastroResponsavelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroResponsavelActionPerformed
-        String nomeResponsavel = null,teleResponsavel,cpfResponsavel,enderecoResponsavel,ECResponsavel = null,RGResponsavel;
+        String nomeResponsavel = "",teleResponsavel,cpfResponsavel,enderecoResponsavel,ECResponsavel = "",RGResponsavel;
         char SexoResponsavel;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
         try {
@@ -251,10 +252,18 @@ public class JFResponsavel extends javax.swing.JFrame {
             Logger.getLogger(JFResponsavel.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-         r = new Pessoa(nomeResponsavel, teleResponsavel, cpfResponsavel, RGResponsavel, RGResponsavel, ECResponsavel, dataNascimentoReponsavel, SexoResponsavel) {
-        };
+        r  = new Pessoa(nomeResponsavel, teleResponsavel, cpfResponsavel, RGResponsavel, enderecoResponsavel, ECResponsavel, dataNascimentoReponsavel, SexoResponsavel) {
+        }; 
+             if ((jTFNomeResponsavel.getText().isEmpty()) || (jTFTelefoneResponsavel.getText().isEmpty()) || (jTFCPFResponsavel.getText().isEmpty())
+                || (jTFRGResponsavel.getText().isEmpty()) || (jTFEnderecoResponsavel.getText().isEmpty()) || (jTFEstadoCivilResponsavel.getText().isEmpty()) || (jTFDataNascimentoResponsavel.getText().isEmpty()) || (jTFSexoResponsavel.getText().isEmpty())
+                || (r == null)) {
+            JOptionPane.showMessageDialog(this, "Preencha os campos");
+
+        } else {
+      
+       
         SPaciente.getInstance().getResponsavel().add(r);
-        dispose();
+        dispose();  }
     }//GEN-LAST:event_jBCadastroResponsavelActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

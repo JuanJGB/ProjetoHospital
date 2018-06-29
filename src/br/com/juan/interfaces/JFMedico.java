@@ -64,7 +64,6 @@ public class JFMedico extends javax.swing.JFrame {
         jLTeleMedico = new javax.swing.JLabel();
         jTFTelefoneMedico = new javax.swing.JTextField();
         jBCadastrarMedico = new javax.swing.JButton();
-        jBMedicosCadastrados = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -248,13 +247,6 @@ public class JFMedico extends javax.swing.JFrame {
             }
         });
 
-        jBMedicosCadastrados.setText("Mostrar cadastrados");
-        jBMedicosCadastrados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBMedicosCadastradosActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -266,11 +258,9 @@ public class JFMedico extends javax.swing.JFrame {
                         .addComponent(jLCadastroMedico))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(jBMedicosCadastrados)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jBCadastrarMedico))
                             .addComponent(jPCadastroMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -283,9 +273,7 @@ public class JFMedico extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPCadastroMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBCadastrarMedico)
-                    .addComponent(jBMedicosCadastrados))
+                .addComponent(jBCadastrarMedico)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -320,11 +308,12 @@ public class JFMedico extends javax.swing.JFrame {
 
         char SexoMedico = 0;
         if (!jTFSexoMedico.getText().isEmpty()) {
-            try {
-                SexoMedico = this.jTFSexoMedico.getText().toUpperCase().charAt(0);
-            } catch (StringIndexOutOfBoundsException sioobe) {
-                JOptionPane.showMessageDialog(this, "CARACTERe INVÁLIDO");
-            }
+               
+            
+                if ((SexoMedico != 'M') && (SexoMedico != 'A')){
+                JOptionPane.showMessageDialog(this, "No campo sexo digite apenas 'M' ou 'F' ");
+                }else{ SexoMedico = this.jTFSexoMedico.getText().toUpperCase().charAt(0);
+           
         }
 
         Date DataNascimentoMedico = new Date();
@@ -348,7 +337,6 @@ public class JFMedico extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Apenas numeros");
             }
         }
-
         try {
             setor = this.jTFSetorMedico.getText();
         } catch (StringIndexOutOfBoundsException sioobe) {
@@ -357,19 +345,14 @@ public class JFMedico extends javax.swing.JFrame {
         m = new Medico(crm, especialidade, setor, NomeMedico, TelefoneMedico, CPFMedico, RGMedico, EnderecoMedico, EstadoCivilMedico, DataNascimentoMedico, SexoMedico);
         if ((jTFCRMMedico.getText().isEmpty())||(jTFEspecialidadeMedico.getText().isEmpty()) ||(jTFNomeMedico.getText().isEmpty()) || (jTFTelefoneMedico.getText().isEmpty()) || (jTFCPFMedico.getText().isEmpty())
                 || (jTFRGMedico.getText().isEmpty()) || (jTFEnderecoMedico.getText().isEmpty()) || (jTFEstadoCivilMedico.getText().isEmpty()) || (jTFDataNascimentoMedico.getText().isEmpty()) || (jTFSexoMedico.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(this, "Preencha os campos");
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos");
         } else {
+           
+            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso");
 
             SMedico.getInstance().getMedicos().add(m);
-        }
+        }}
     }//GEN-LAST:event_jBCadastrarMedicoActionPerformed
-
-    private void jBMedicosCadastradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMedicosCadastradosActionPerformed
-        String Medicos = "";
-        Medicos = SMedico.getInstance().getMedicos().stream().map((med) -> "" + med.toString() + ".").reduce(Medicos, String::concat);
-
-        JOptionPane.showMessageDialog(this, Medicos);
-    }//GEN-LAST:event_jBMedicosCadastradosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -409,7 +392,6 @@ public class JFMedico extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCadastrarMedico;
-    private javax.swing.JButton jBMedicosCadastrados;
     private javax.swing.JLabel jDataNascimentoMedico;
     private javax.swing.JLabel jLCPFMedico;
     private javax.swing.JLabel jLCadastroMedico;

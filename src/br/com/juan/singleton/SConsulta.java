@@ -6,6 +6,7 @@
 package br.com.juan.singleton;
 
 import br.com.juan.objetos.Consulta;
+import br.com.juan.objetos.Medico;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,11 @@ import java.util.List;
  */
 public class SConsulta {
     List<Consulta> consultas =new ArrayList();
+    List<String> medicamentos = new ArrayList();
+
+    public List<String> getMedicamentos() {
+        return medicamentos;
+    }
 
     public List<Consulta> getConsultas() {
         return consultas;

@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
  * @author SATC
  */
 public class JFEnfermeira extends javax.swing.JFrame {
+
     Enfermeira e;
 
     /**
@@ -256,10 +257,10 @@ public class JFEnfermeira extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFCofenActionPerformed
 
     private void jBCadastrarEnfermeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarEnfermeiraActionPerformed
-        
-        SimpleDateFormat sdf= new SimpleDateFormat("dd/mm/yyyy");
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
         String nomeEnfermeira = this.jTFNomeEnfermeiro.getText();
-        String RGEnfermeira =this.jTFRGEnfermeira.getText();
+        String RGEnfermeira = this.jTFRGEnfermeira.getText();
         String CPFEnfermeira = this.jTFCPFEnfermeira.getText();
         String EnderecoEnfermeira = this.jTFEnderecoEnfermeira.getText();
         char sexo = this.jTFSexoEnfermeira.getText().toUpperCase().charAt(0);
@@ -269,21 +270,20 @@ public class JFEnfermeira extends javax.swing.JFrame {
         String EstadoCivilEnfermeira = this.jTFEstadoCivilEnfermeira.getText();
         Date DataNascimentoEnfermeira = new Date();
         try {
-             DataNascimentoEnfermeira = sdf.parse(this.jTFDataNascimentoEnfermeira.getText());
+            DataNascimentoEnfermeira = sdf.parse(this.jTFDataNascimentoEnfermeira.getText());
         } catch (ParseException ex) {
             Logger.getLogger(JFEnfermeira.class.getName()).log(Level.SEVERE, null, ex);
         }
         e = new Enfermeira(Cofen, setor, nomeEnfermeira, telefone, CPFEnfermeira, RGEnfermeira, EnderecoEnfermeira, EstadoCivilEnfermeira, DataNascimentoEnfermeira, sexo);
-         if ((jTFNomeEnfermeiro.getText().isEmpty()) || (jTFTelefoneEnfermeira.getText().isEmpty()) || (jTFCPFEnfermeira.getText().isEmpty())
-                || (jTFRGEnfermeira.getText().isEmpty()) || (jTFEnderecoEnfermeira.getText().isEmpty()) || (jTFEstadoCivilEnfermeira.getText().isEmpty()) || (jTFDataNascimentoEnfermeira.getText().isEmpty()) || (jTFSexoEnfermeira.getText().isEmpty()))
-              {
+        if ((jTFNomeEnfermeiro.getText().isEmpty()) || (jTFTelefoneEnfermeira.getText().isEmpty()) || (jTFCPFEnfermeira.getText().isEmpty())
+                || (jTFRGEnfermeira.getText().isEmpty()) || (jTFEnderecoEnfermeira.getText().isEmpty()) || (jTFEstadoCivilEnfermeira.getText().isEmpty()) || (jTFDataNascimentoEnfermeira.getText().isEmpty()) || (jTFSexoEnfermeira.getText().isEmpty())) {
             JOptionPane.showMessageDialog(this, "Preencha os campos");
 
         } else {
-        SEnfermeira.getInstance().getEnfermeiras().add(e);
-       
-        dispose();
-         }
+            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso");
+            SEnfermeira.getInstance().getEnfermeiras().add(e);
+
+        }
     }//GEN-LAST:event_jBCadastrarEnfermeiraActionPerformed
 
     /**

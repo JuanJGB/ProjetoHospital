@@ -51,7 +51,6 @@ public class JFPaciente extends javax.swing.JFrame {
         jLSexoPaciente = new javax.swing.JLabel();
         jTFSexoPaciente = new javax.swing.JTextField();
         jTFEstadoCivilPaciente = new javax.swing.JTextField();
-        jTFnumSUS = new javax.swing.JTextField();
         jLNumSus = new javax.swing.JLabel();
         jLResponsavel = new javax.swing.JLabel();
         jTFIdPaciente = new javax.swing.JTextField();
@@ -69,6 +68,7 @@ public class JFPaciente extends javax.swing.JFrame {
         jLTelePaciente = new javax.swing.JLabel();
         jTFTelefonePaciente = new javax.swing.JTextField();
         jCBResponsaveis = new javax.swing.JComboBox<>();
+        jTFNumSus = new javax.swing.JTextField();
         jBCadastrarPaciente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -88,13 +88,6 @@ public class JFPaciente extends javax.swing.JFrame {
         jTFSexoPaciente.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
         jTFEstadoCivilPaciente.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-
-        jTFnumSUS.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTFnumSUS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFnumSUSActionPerformed(evt);
-            }
-        });
 
         jLNumSus.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLNumSus.setText("Número SUS:");
@@ -150,6 +143,8 @@ public class JFPaciente extends javax.swing.JFrame {
             }
         });
 
+        jTFNumSus.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+
         javax.swing.GroupLayout jPCadastroPacienteLayout = new javax.swing.GroupLayout(jPCadastroPaciente);
         jPCadastroPaciente.setLayout(jPCadastroPacienteLayout);
         jPCadastroPacienteLayout.setHorizontalGroup(
@@ -195,12 +190,12 @@ public class JFPaciente extends javax.swing.JFrame {
                             .addComponent(jDataNascimentoPaciente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(jPCadastroPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTFnumSUS)
                     .addComponent(jTFTelefonePaciente)
                     .addComponent(jTFSexoPaciente)
                     .addComponent(jTFEstadoCivilPaciente)
                     .addComponent(jTFIdPaciente)
-                    .addComponent(jTFDataNascimentoPaciente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTFDataNascimentoPaciente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFNumSus))
                 .addGap(21, 21, 21))
         );
         jPCadastroPacienteLayout.setVerticalGroup(
@@ -220,10 +215,10 @@ public class JFPaciente extends javax.swing.JFrame {
                     .addComponent(jTFRGpaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPCadastroPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFnumSUS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLNumSus)
                     .addComponent(jTFEnderecoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLEnderecoPaciente))
+                    .addComponent(jLEnderecoPaciente)
+                    .addComponent(jTFNumSus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addGroup(jPCadastroPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFSexoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -303,11 +298,13 @@ public class JFPaciente extends javax.swing.JFrame {
         RGPaciente = this.jTFRGpaciente.getText();
         CPFpaciente = this.jTFCPFpaciente.getText();
         TelefonePaciente = this.jTFTelefonePaciente.getText();
+        
+        if (!jTFNumSus.getText().isEmpty()){
         try {
-            numeroSus = Integer.parseInt(this.jTFnumSUS.getText());
+            numeroSus = Integer.parseInt(this.jTFNumSus.getText());
         } catch (NumberFormatException nfe) {
              JOptionPane.showMessageDialog(this, "APENAS NÚMEROS");
-        }
+        }}
         try {
             EstadoCivilPaciente = this.jTFEstadoCivilPaciente.getText();
         } catch (StringIndexOutOfBoundsException sioobe) {
@@ -344,14 +341,14 @@ public class JFPaciente extends javax.swing.JFrame {
         }
        
         
-        p = new Paciente(IdPaciente, this.r, numeroSus, NomePaciente, TelefonePaciente, CPFpaciente, RGPaciente, EnderecoPaciente, EstadoCivilPaciente, dataNascimentoPaciente, SexoPaciente);
-        if ((jTFIdPaciente.getText().isEmpty()) || (jTFnumSUS.getText().isEmpty()) ||(jTFNomePaciente.getText().isEmpty()) || (jTFTelefonePaciente.getText().isEmpty()) || (jTFCPFpaciente.getText().isEmpty())
+        p = new Paciente(IdPaciente, r, numeroSus, NomePaciente, TelefonePaciente, CPFpaciente, RGPaciente, EnderecoPaciente, EstadoCivilPaciente, dataNascimentoPaciente, SexoPaciente);
+        if ((jTFIdPaciente.getText().isEmpty()) || (jTFNumSus.getText().isEmpty()) ||(jTFNomePaciente.getText().isEmpty()) || (jTFTelefonePaciente.getText().isEmpty()) || (jTFCPFpaciente.getText().isEmpty())
                 || (jTFRGpaciente.getText().isEmpty()) || (jTFEnderecoPaciente.getText().isEmpty()) || (jTFEstadoCivilPaciente.getText().isEmpty()) || (jTFDataNascimentoPaciente.getText().isEmpty()) || (jTFSexoPaciente.getText().isEmpty())
-                || (r == null)) {
+                ){
             JOptionPane.showMessageDialog(this, "Preencha os campos");
 
         } else {
-            
+            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso");
             SPaciente.getInstance().getPacientes().add(p);
         }
 
@@ -368,14 +365,6 @@ public class JFPaciente extends javax.swing.JFrame {
                 break;
         }      // TODO add your handling code here:
     }//GEN-LAST:event_jCBResponsaveisActionPerformed
-
-    private void jTFnumSUSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFnumSUSActionPerformed
-        int numeroSus = 0;
-        try {
-            numeroSus = Integer.parseInt(this.jLNumSus.getText());
-        } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(this, "Apenas numeros");
-        }    }//GEN-LAST:event_jTFnumSUSActionPerformed
 
     /**
      * @param args the command line arguments
@@ -442,9 +431,9 @@ public class JFPaciente extends javax.swing.JFrame {
     private javax.swing.JTextField jTFEstadoCivilPaciente;
     private javax.swing.JTextField jTFIdPaciente;
     private javax.swing.JTextField jTFNomePaciente;
+    private javax.swing.JTextField jTFNumSus;
     private javax.swing.JTextField jTFRGpaciente;
     private javax.swing.JTextField jTFSexoPaciente;
     private javax.swing.JTextField jTFTelefonePaciente;
-    private javax.swing.JTextField jTFnumSUS;
     // End of variables declaration//GEN-END:variables
 }

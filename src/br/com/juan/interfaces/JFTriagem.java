@@ -64,8 +64,6 @@ public class JFTriagem extends javax.swing.JFrame {
         jTFSintoma = new javax.swing.JTextField();
         jTFPressao = new javax.swing.JTextField();
         jBAddAlergias = new javax.swing.JButton();
-        jTFEnfermeira = new javax.swing.JTextField();
-        jTFPaciente = new javax.swing.JTextField();
         jLAlergias = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jBCadastrarTriagem = new javax.swing.JButton();
@@ -121,15 +119,6 @@ public class JFTriagem extends javax.swing.JFrame {
             }
         });
 
-        jTFEnfermeira.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-
-        jTFPaciente.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTFPaciente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFPacienteActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPTriagemLayout = new javax.swing.GroupLayout(jPTriagem);
         jPTriagem.setLayout(jPTriagemLayout);
         jPTriagemLayout.setHorizontalGroup(
@@ -146,9 +135,7 @@ public class JFTriagem extends javax.swing.JFrame {
                 .addGroup(jPTriagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTFSintoma, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
                     .addComponent(jTFPressao)
-                    .addComponent(jTFTemperatura)
-                    .addComponent(jTFPaciente)
-                    .addComponent(jTFEnfermeira))
+                    .addComponent(jTFTemperatura))
                 .addGroup(jPTriagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPTriagemLayout.createSequentialGroup()
                         .addGroup(jPTriagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,7 +163,7 @@ public class JFTriagem extends javax.swing.JFrame {
                                 .addGap(8, 8, 8))
                             .addGroup(jPTriagemLayout.createSequentialGroup()
                                 .addComponent(jLAlergia)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLAlergias, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -187,14 +174,12 @@ public class JFTriagem extends javax.swing.JFrame {
                 .addGroup(jPTriagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLEnfermeira)
                     .addComponent(jTFPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLPeso)
-                    .addComponent(jTFEnfermeira, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLPeso))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPTriagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLAltura)
                     .addComponent(jTFAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLPaciente)
-                    .addComponent(jTFPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLPaciente))
                 .addGap(18, 18, 18)
                 .addGroup(jPTriagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -264,12 +249,7 @@ public class JFTriagem extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTFPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFPacienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFPacienteActionPerformed
-
     private void jBAddAlergiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddAlergiasActionPerformed
-       
 
         if (!jTFAlergia.getText().equals("")) {            
           tr.getAlergias().add(jTFAlergia.getText()); 
@@ -282,21 +262,58 @@ public class JFTriagem extends javax.swing.JFrame {
 
     private void jBCadastrarTriagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarTriagemActionPerformed
         
-        float temperatura = Float.parseFloat(this.jTFTemperatura.getText());
+        float temperatura =0 ,peso = 0;
+        if(!jTFTemperatura.getText().isEmpty()){
+        try {
+             temperatura = Float.parseFloat(this.jTFTemperatura.getText());
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(this, "No campo temperatura é apenas números");
+        }}
+       
         float IMC;
-        float altura = Float.parseFloat(this.jTFAltura.getText());
-        float peso = Float.parseFloat(this.jTFPeso.getText());
-        String Sintoma = this.jTFSintoma.getText();
+        float altura = 0;
+        
+        if(!jTFAltura.getText().isEmpty()){
+        try {
+             altura = Float.parseFloat(this.jTFAltura.getText());
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(this, "No campo altura digite apenas números");
+        }}
+        
+        
+        
+        
+        if(!jTFPeso.getText().isEmpty()){
+        try {
+             peso = Float.parseFloat(this.jTFPeso.getText());
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(this, "No campo peso digite apenas números");
+        }}
+        String sintoma = "";
+        try {
+             sintoma = this.jTFSintoma.getText();
+        } catch (StringIndexOutOfBoundsException sioobe) {
+            JOptionPane.showMessageDialog(this, "No campo sintoma digite apenas caracteres");
+        }
+        
         
         String pressao = this.jTFPressao.getText();
         boolean febre;
         diagnosticarFebre(temperatura);
         CalculoIMC(altura, peso);
         IMC = CalculoIMC(altura, peso);
+        tr = new Triagem(e, p, pressao, sintoma, peso, altura, IMC, temperatura, rootPaneCheckingEnabled);
+        if ((jTFAltura.getText().isEmpty()) || (jTFPeso.getText().isEmpty()) ||(jTFTemperatura.getText().isEmpty()) || (jTFSintoma.getText().isEmpty()) || (jTFPressao.getText().isEmpty())
+                 ){
+            JOptionPane.showMessageDialog(this, "Preencha os campos");
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso");
+             STriagem.getInstance().getTriagens().add(tr);
+        }
         
-        tr = new Triagem(e, p, pressao, Sintoma, peso, altura, IMC, temperatura, rootPaneCheckingEnabled);
         
-        STriagem.getInstance().getTriagens().add(tr);
+       
         
     }//GEN-LAST:event_jBCadastrarTriagemActionPerformed
 
@@ -353,8 +370,6 @@ public class JFTriagem extends javax.swing.JFrame {
     private javax.swing.JPanel jPTriagem;
     private javax.swing.JTextField jTFAlergia;
     private javax.swing.JTextField jTFAltura;
-    private javax.swing.JTextField jTFEnfermeira;
-    private javax.swing.JTextField jTFPaciente;
     private javax.swing.JTextField jTFPeso;
     private javax.swing.JTextField jTFPressao;
     private javax.swing.JTextField jTFSintoma;

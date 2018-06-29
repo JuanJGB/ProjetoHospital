@@ -30,7 +30,7 @@ public class Paciente extends Pessoa {
 
     @Override
     public String toString() {
-        return "Paciente: " + "\nid:" + id + "\nResponsavel: " + responsavel + "\nnumeroSus:" + numeroSus + super.toString();
+        return "Paciente: " + "\nid:" + id + "\nnumeroSus:" + numeroSus + super.toString();
     }
 
     public void setId(int id) {
